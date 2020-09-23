@@ -4,16 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutterdeno/Application.dart';
 
 import '../../Application.dart';
+import '../../routers/Routers.dart';
 
 class RouteMessage extends StatelessWidget {
 
 
-  _scendViewNavigator(BuildContext context) async{
-    String str = '126343288';
-    Application.router.navigateTo(context, '/ScendView?str=$str',transition: TransitionType.fadeIn).then((result){
-      if(result != null){
-        print(result);
-      }
+  _scendview(BuildContext context) async{
+    String str = '001';
+    Application.router.navigateTo(context, '${Routers.scendView}?str=$str',transition: TransitionType.inFromRight).then((result) => {
+      print('接受到的数值：$result')
     });
   }
 
@@ -27,7 +26,7 @@ class RouteMessage extends StatelessWidget {
             color: Colors.cyan,
             onPressed: (){
               // ignore: unnecessary_statements
-              _scendViewNavigator(context);
+              _scendview(context);
             },
           ),
         ),

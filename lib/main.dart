@@ -14,7 +14,7 @@ import 'package:flutterdeno/pages/cupertino_home/RouteMessage.dart';
 import 'package:flutterdeno/pages/cupertino_home/WrapView.dart';
 import 'package:flutterdeno/routers/Routers.dart';
 import 'Application.dart';
-import 'file:///F:/wanandroid/flutter_deno/lib/pages/RequestHttpWidge.dart';
+import 'package:flutterdeno/pages/RequestHttpWidge.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'pages/cupertino_home/HomeCupertinoButtonBar.dart';
 

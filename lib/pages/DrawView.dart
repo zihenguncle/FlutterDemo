@@ -70,8 +70,10 @@ class LinerPainter extends CustomPainter {
         ],
         _paint);
     const PI = 3.1415926;
-    Rect rect1 = Rect.fromCircle(center: Offset(200.0, 300.0), radius: 10.0);
-    canvas.drawArc(rect1, 0.0, PI * 2, true, _paint);
+//    Rect rect1 = Rect.fromCircle(center: Offset(200.0, 300.0), radius: 10.0);
+//    Rect rect1 = Rect.fromCircle(center: Offset(200,300),radius:10);
+//    rect1.center = Offset(200.0,300.0);
+//    canvas.drawArc(rect1, 0.0, PI * 2, true, _paint);
   }
 
 

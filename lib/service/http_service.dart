@@ -14,7 +14,6 @@ Future request(url,{formData})async{
     //发起POST请求，传入url及表单参数
     response = await dio.post(url,data: formData);
 
-
     //请求成功
     if(response.statusCode == 200){
       return response;

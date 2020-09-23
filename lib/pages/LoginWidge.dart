@@ -1,8 +1,11 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutterdeno/utils/SharedPreferenceUtil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UsernameLogin extends StatelessWidget{
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,10 +24,11 @@ class _LoginPageState extends State<LoginPage>{
 
 
 
+
   //定义一个全局key来获取form表单组件
   GlobalKey<FormState> loginKey = GlobalKey<FormState>();
-  String username;
-  String password;
+  String username ;
+  String password ;
   void login(){
     //获取当前的form状态
     var loginForm = loginKey.currentState;
@@ -37,6 +41,7 @@ class _LoginPageState extends State<LoginPage>{
   @override
   Widget build(BuildContext context) {
 
+    String _userName;
     final TextEditingController controller = TextEditingController();
     controller.addListener(() {
 //      print('您输入的内容为：${controller.text}');
@@ -85,7 +90,7 @@ class _LoginPageState extends State<LoginPage>{
                 height: 42.0,
                 //登录按钮
                 child: RaisedButton(onPressed: login,
-                  child: Text('登录'),),
+                  child: Text('登录(保存)'),),
               ),
             ),
             Container(
@@ -99,11 +104,20 @@ class _LoginPageState extends State<LoginPage>{
                       maxLength: 30,
                       decoration: InputDecoration(
                         filled: true,
+                        labelText:  SharedPreferenceUtil.get("username",String),
                         helperText: '用户名',
                         prefixIcon: Icon(Icons.account_circle),
                         suffixText: 'hahah',
                       ),
-                    )
+                    ),
+                    RaisedButton(onPressed: (){
+                      SharedPreferenceUtil.save("username", controller.text.toString());
+                    },
+                    child: Text('保存到本地'),),
+                    RaisedButton(onPressed: (){
+                      SharedPreferenceUtil.remove("username");
+                    },
+                    child: Text('删除存储数据'),)
                   ],
                 ),
               ),

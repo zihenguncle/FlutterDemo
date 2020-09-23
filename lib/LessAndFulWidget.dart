@@ -1,16 +1,19 @@
-
 //import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class LessAndFulWidget extends StatelessWidget{
+BuildContext hcontext;
 
+class LessAndFulWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    hcontext = context;
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (BuildContext context) { return MyCounter(); },),
+        ChangeNotifierProvider(create: (BuildContext context){
+          return MyCounter();
+        },)
       ],
       child: MaterialApp(
         title: 'Provider示例',
@@ -18,35 +21,42 @@ class LessAndFulWidget extends StatelessWidget{
       ),
     );
   }
-
 }
-class LessAndFulView extends StatelessWidget{
+
+class LessAndFulView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Container(
+         margin: EdgeInsets.all(10.0),
+          child: IconButton(icon: Icon(Icons.arrow_back_ios,size: 20,), onPressed: (){
+            Navigator.pop(hcontext);
+          }),
+        ),
         title: Text('无状态和有状态的组件示例'),
         actions: <Widget>[
           FlatButton(
             child: Text('下一页'),
-            onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=>ScendLessAndFulView())),
+            onPressed: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ScendLessAndFulView())),
           ),
         ],
       ),
       body: Center(
         child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
             Text('点击右下角增加次数：'),
-              Text('${Provider.of<MyCounter>(context).count}',style: TextStyle(fontSize: 20)),
+            Text('${Provider.of<MyCounter>(context).count}',
+                style: TextStyle(fontSize: 20)),
           ],
         ),
       ),
-
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
+        onPressed: () {
           //调用数据模型中的increment方法更改数据
-          Provider.of<MyCounter>(context,listen: false).increment();
+          Provider.of<MyCounter>(context, listen: false).increment();
         },
         tooltip: '增加',
         child: Icon(Icons.add),
@@ -55,7 +65,7 @@ class LessAndFulView extends StatelessWidget{
   }
 }
 
-class ScendLessAndFulView extends StatelessWidget{
+class ScendLessAndFulView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,22 +83,23 @@ class ScendLessAndFulView extends StatelessWidget{
       ),
       floatingActionButton: FloatingActionButton(
         tooltip: '点击增加数量',
-        onPressed: (){
-          Provider.of<MyCounter>(context,listen: false).increment();
+        onPressed: () {
+          Provider.of<MyCounter>(context, listen: false).increment();
         },
         child: Icon(Icons.add),
       ),
     );
   }
-
 }
 
-class MyCounter with ChangeNotifier{
+class MyCounter with ChangeNotifier {
   //存储数据
   int _count = 0;
+
   //提供外部能够访问的数据
   int get count => _count;
-  void increment(){
+
+  void increment() {
     _count++;
     print(_count);
     //通知所有听众进行刷新
